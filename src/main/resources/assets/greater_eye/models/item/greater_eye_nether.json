@@ -1,0 +1,6 @@
+{
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "greater_eye:item/greater_eye_nether"
+   }
+}

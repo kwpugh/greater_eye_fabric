@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "greater_eye",
+  "version": "${version}",
+
+  "name": "Greater Eye of Ender",
+  "description": "Taking the Eye of Ender to the next level.",
+  "authors": [
+    "Kevin Pugh"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/greater-eye-of-ender-fabric",
+    "issues": "https://github.com/kwpugh/Greater_Eye/issues",
+    "sources": ""
+  },
+
+  "license": "MIT",
+  "icon": "assets/greater_eye/textures/item/greater_eye.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.kwpugh.greater_eye.GreaterEye"
+    ]
+  },
+  "mixins": [
+    "greater_eye.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "java": ">=16",
+    "minecraft": "1.17.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
