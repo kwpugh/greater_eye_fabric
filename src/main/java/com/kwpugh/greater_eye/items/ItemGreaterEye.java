@@ -130,6 +130,12 @@ public class ItemGreaterEye extends Item
 
 		locpos = ((ServerWorld)worldIn).getChunkManager().getChunkGenerator().locateStructure((ServerWorld)worldIn, type, playerIn.getBlockPos(), 100, false);	
 
+		if(locpos == null)
+		{
+			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure may have been replaced by another mod.").formatted(Formatting.LIGHT_PURPLE), true);
+			return;
+		}
+
 		ItemStack itemStack = playerIn.getStackInHand(handIn);
 
 		int structureDistance = MathHelper.floor(getDistance(playerpos.getX(), playerpos.getZ(), locpos.getX(), locpos.getZ()));
