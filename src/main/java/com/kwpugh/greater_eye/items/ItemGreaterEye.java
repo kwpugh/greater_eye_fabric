@@ -27,7 +27,7 @@ public class ItemGreaterEye extends Item
 {
 	String structureType = "Village";
 	StructureFeature<?> type = StructureFeature.VILLAGE;
-	
+
 	public ItemGreaterEye(Item.Settings settings)
 	{
 		super(settings);
@@ -37,12 +37,12 @@ public class ItemGreaterEye extends Item
 	{
 		ItemStack itemStack = playerIn.getStackInHand(handIn);
 
-		playerIn.setCurrentHand(handIn); 
-		
+		playerIn.setCurrentHand(handIn);
+
 		if(!worldIn.isClient)
 		{
 			ServerWorld serverWorld = (ServerWorld)worldIn;
-			
+
 			if((worldIn instanceof ServerWorld) && (playerIn.isSneaking() && (serverWorld.getRegistryKey().equals(World.OVERWORLD))))    //shift right-click changes structure type to locate
 			{
 				if(structureType == "Village")
@@ -95,32 +95,32 @@ public class ItemGreaterEye extends Item
 					structureType = "Village";
 					type = StructureFeature.VILLAGE;
 				}
-				
+
 				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureType).formatted(Formatting.LIGHT_PURPLE)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
 		}
-		
+
 		if(!playerIn.isSneaking())   //simple right-click executes
 		{
 			if(!worldIn.isClient)
 			{
 				ServerWorld serverWorld = (ServerWorld)worldIn;
-				
+
 				if((worldIn instanceof ServerWorld) && (serverWorld.getRegistryKey().equals(World.OVERWORLD)));
 				{
 					findStructureAndShoot(worldIn, playerIn, itemStack, structureType, type, handIn);
 
 					return TypedActionResult.success(itemStack);
 				}
-			}		
+			}
 		}
 
         return TypedActionResult.success(itemStack);
 	}
 
-	
+
 	private static void findStructureAndShoot(World worldIn, PlayerEntity playerIn, ItemStack itemstack, String structureType, StructureFeature<?> type, Hand handIn)
 	{
 		// A structure will always be found, no matter how far away
@@ -128,7 +128,7 @@ public class ItemGreaterEye extends Item
 		BlockPos locpos = playerpos;
 		Random random = new Random();
 
-		locpos = ((ServerWorld)worldIn).getChunkManager().getChunkGenerator().locateStructure((ServerWorld)worldIn, type, playerIn.getBlockPos(), 100, false);	
+		locpos = ((ServerWorld)worldIn).getChunkManager().getChunkGenerator().locateStructure((ServerWorld)worldIn, type, playerIn.getBlockPos(), 100, false);
 
 		if(locpos == null)
 		{
