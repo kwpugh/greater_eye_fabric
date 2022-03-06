@@ -28,7 +28,7 @@ import java.util.Random;
 public class ItemGreaterEye extends Item
 {
 	String structureChoice = "Village";
-	static TagKey<ConfiguredStructureFeature<?, ?>> newType = GreaterEye.VILLAGE;
+	static TagKey<ConfiguredStructureFeature<?, ?>> overworldType = GreaterEye.VILLAGE;
 
 	public ItemGreaterEye(Settings settings)
 	{
@@ -50,43 +50,43 @@ public class ItemGreaterEye extends Item
 				if (structureChoice == "Village")
 				{
 					structureChoice = "Mineshaft";
-					newType = GreaterEye.MINESSHAFT;
+					overworldType = GreaterEye.MINESSHAFT;
 				} else if (structureChoice == "Mineshaft")
 				{
 					structureChoice = "Shipwreck";
-					newType = GreaterEye.SHIPWRECK;
+					overworldType = GreaterEye.SHIPWRECK;
 				} else if (structureChoice == "Shipwreck")
 				{
 					structureChoice = "Pillager_Outpost";
-					newType = GreaterEye.PILLAGER_OUTPOST;
+					overworldType = GreaterEye.PILLAGER_OUTPOST;
 				} else if (structureChoice == "Pillager_Outpost")
 				{
 					structureChoice = "Monument";
-					newType = GreaterEye.MONUMENT;
+					overworldType = GreaterEye.MONUMENT;
 				} else if (structureChoice == "Monument")
 				{
 					structureChoice = "Mansion";
-					newType = GreaterEye.MANSION;
+					overworldType = GreaterEye.MANSION;
 				} else if (structureChoice == "Mansion")
 				{
 					structureChoice = "Desert_Pyramid";
-					newType = GreaterEye.DESERT_PYRAMID;
+					overworldType = GreaterEye.DESERT_PYRAMID;
 				} else if (structureChoice == "Desert_Pyramid")
 				{
 					structureChoice = "Jungle_Pyramid";
-					newType = GreaterEye.JUNGLE_PYRAMID;
+					overworldType = GreaterEye.JUNGLE_PYRAMID;
 				} else if (structureChoice == "Jungle_Pyramid")
 				{
 					structureChoice = "Stronghold";
-					newType = GreaterEye.STRONGHOLD;
+					overworldType = GreaterEye.STRONGHOLD;
 				} else if (structureChoice == "Stronghold")
 				{
 					structureChoice = "Buried Treasure";
-					newType = GreaterEye.BURIED_TREASURE;
+					overworldType = GreaterEye.BURIED_TREASURE;
 				} else if (structureChoice == "Buried Treasure")
 				{
 					structureChoice = "Village";
-					newType = GreaterEye.VILLAGE;
+					overworldType = GreaterEye.VILLAGE;
 				}
 
 				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.LIGHT_PURPLE)), true);
@@ -123,7 +123,7 @@ public class ItemGreaterEye extends Item
 		Random random = new Random();
 		ServerWorld serverWorld = (ServerWorld) worldIn;
 
-		locpos = serverWorld.locateStructure(newType, playerIn.getBlockPos(), 100, false);
+		locpos = serverWorld.locateStructure(overworldType, playerIn.getBlockPos(), 100, false);
 
 		if(locpos == null)
 		{

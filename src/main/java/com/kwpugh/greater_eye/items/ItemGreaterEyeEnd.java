@@ -29,7 +29,6 @@ import java.util.Random;
 public class ItemGreaterEyeEnd extends Item
 {
 	String structureChoice = "End City";
-    //static TagKey<ConfiguredStructureFeature<?, ?>> endType = GreaterEye.END_CITY;
 
 	public ItemGreaterEyeEnd(Item.Settings settings)
 	{
