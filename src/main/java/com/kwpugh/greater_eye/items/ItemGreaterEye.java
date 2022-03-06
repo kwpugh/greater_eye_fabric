@@ -1,8 +1,6 @@
 package com.kwpugh.greater_eye.items;
 
-import java.util.List;
-import java.util.Random;
-
+import com.kwpugh.greater_eye.GreaterEye;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EyeOfEnderEntity;
@@ -13,6 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -21,14 +20,17 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+
+import java.util.List;
+import java.util.Random;
 
 public class ItemGreaterEye extends Item
 {
-	String structureType = "Village";
-	StructureFeature<?> type = StructureFeature.VILLAGE;
+	String structureChoice = "Village";
+	static TagKey<ConfiguredStructureFeature<?, ?>> newType = GreaterEye.VILLAGE;
 
-	public ItemGreaterEye(Item.Settings settings)
+	public ItemGreaterEye(Settings settings)
 	{
 		super(settings);
 	}
@@ -39,71 +41,70 @@ public class ItemGreaterEye extends Item
 
 		playerIn.setCurrentHand(handIn);
 
-		if (!worldIn.isClient)
+		if(!worldIn.isClient)
 		{
 			ServerWorld serverWorld = (ServerWorld) worldIn;
 
-			if ((worldIn instanceof ServerWorld) && (playerIn.isSneaking() && (serverWorld.getRegistryKey().equals(World.OVERWORLD))))    //shift right-click changes structure type to locate
+			if((playerIn.isSneaking() && (serverWorld.getRegistryKey().equals(World.OVERWORLD))))    //shift right-click changes structure type to locate
 			{
-				if (structureType == "Village")
+				if (structureChoice == "Village")
 				{
-					structureType = "Mineshaft";
-					type = StructureFeature.MINESHAFT;
-				} else if (structureType == "Mineshaft")
+					structureChoice = "Mineshaft";
+					newType = GreaterEye.MINESSHAFT;
+				} else if (structureChoice == "Mineshaft")
 				{
-					structureType = "Shipwreck";
-					type = StructureFeature.SHIPWRECK;
-				} else if (structureType == "Shipwreck")
+					structureChoice = "Shipwreck";
+					newType = GreaterEye.SHIPWRECK;
+				} else if (structureChoice == "Shipwreck")
 				{
-					structureType = "Pillager_Outpost";
-					type = StructureFeature.PILLAGER_OUTPOST;
-				} else if (structureType == "Pillager_Outpost")
+					structureChoice = "Pillager_Outpost";
+					newType = GreaterEye.PILLAGER_OUTPOST;
+				} else if (structureChoice == "Pillager_Outpost")
 				{
-					structureType = "Monument";
-					type = StructureFeature.MONUMENT;
-				} else if (structureType == "Monument")
+					structureChoice = "Monument";
+					newType = GreaterEye.MONUMENT;
+				} else if (structureChoice == "Monument")
 				{
-					structureType = "Mansion";
-					type = StructureFeature.MANSION;
-				} else if (structureType == "Mansion")
+					structureChoice = "Mansion";
+					newType = GreaterEye.MANSION;
+				} else if (structureChoice == "Mansion")
 				{
-					structureType = "Desert_Pyramid";
-					type = StructureFeature.DESERT_PYRAMID;
-				} else if (structureType == "Desert_Pyramid")
+					structureChoice = "Desert_Pyramid";
+					newType = GreaterEye.DESERT_PYRAMID;
+				} else if (structureChoice == "Desert_Pyramid")
 				{
-					structureType = "Jungle_Pyramid";
-					type = StructureFeature.JUNGLE_PYRAMID;
-				} else if (structureType == "Jungle_Pyramid")
+					structureChoice = "Jungle_Pyramid";
+					newType = GreaterEye.JUNGLE_PYRAMID;
+				} else if (structureChoice == "Jungle_Pyramid")
 				{
-					structureType = "Stronghold";
-					type = StructureFeature.STRONGHOLD;
-				} else if (structureType == "Stronghold")
+					structureChoice = "Stronghold";
+					newType = GreaterEye.STRONGHOLD;
+				} else if (structureChoice == "Stronghold")
 				{
-					structureType = "Buried Treasure";
-					type = StructureFeature.BURIED_TREASURE;
-				} else if (structureType == "Buried Treasure")
+					structureChoice = "Buried Treasure";
+					newType = GreaterEye.BURIED_TREASURE;
+				} else if (structureChoice == "Buried Treasure")
 				{
-					structureType = "Village";
-					type = StructureFeature.VILLAGE;
+					structureChoice = "Village";
+					newType = GreaterEye.VILLAGE;
 				}
 
-				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureType).formatted(Formatting.LIGHT_PURPLE)), true);
+				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.LIGHT_PURPLE)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
 		}
 
-		if (!playerIn.isSneaking())   //simple right-click executes
+		if(!playerIn.isSneaking())   //simple right-click executes
 		{
-			if (!worldIn.isClient)
+			if(!worldIn.isClient)
 			{
 				ServerWorld serverWorld = (ServerWorld) worldIn;
 
 
-				if ((worldIn instanceof ServerWorld) && (serverWorld.getRegistryKey().equals(World.OVERWORLD)))
-					;
+				if((serverWorld.getRegistryKey().equals(World.OVERWORLD)));
 				{
-					findStructureAndShoot(worldIn, playerIn, itemStack, structureType, type, handIn);
+					findStructureAndShoot(worldIn, playerIn, itemStack, structureChoice, handIn);
 
 					return TypedActionResult.success(itemStack);
 				}
@@ -114,16 +115,17 @@ public class ItemGreaterEye extends Item
 	}
 
 
-	private static void findStructureAndShoot(World worldIn, PlayerEntity playerIn, ItemStack itemstack, String structureType, StructureFeature<?> type, Hand handIn)
+	private static void findStructureAndShoot(World worldIn, PlayerEntity playerIn, ItemStack itemstack, String structureChoice, Hand handIn)
 	{
 		// A structure will always be found, no matter how far away
 		BlockPos playerpos = playerIn.getBlockPos();
-		BlockPos locpos = playerpos;
+		BlockPos locpos;
 		Random random = new Random();
+		ServerWorld serverWorld = (ServerWorld) worldIn;
 
-		locpos = ((ServerWorld) worldIn).getChunkManager().getChunkGenerator().locateStructure((ServerWorld) worldIn, type, playerIn.getBlockPos(), 100, false);
+		locpos = serverWorld.locateStructure(newType, playerIn.getBlockPos(), 100, false);
 
-		if (locpos == null)
+		if(locpos == null)
 		{
 			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure may have been replaced by another mod.").formatted(Formatting.LIGHT_PURPLE), true);
 			return;
@@ -133,26 +135,24 @@ public class ItemGreaterEye extends Item
 
 		int structureDistance = MathHelper.floor(getDistance(playerpos.getX(), playerpos.getZ(), locpos.getX(), locpos.getZ()));
 
-		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureType, structureDistance).formatted(Formatting.LIGHT_PURPLE), true);
+		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.LIGHT_PURPLE), true);
 
 		EyeOfEnderEntity finderentity = new EyeOfEnderEntity(worldIn, playerIn.getX(), playerIn.getBodyY(0.5D), playerIn.getZ());
 		finderentity.setItem(itemstack);
 		finderentity.initTargetPos(locpos);
 		worldIn.spawnEntity(finderentity);
 
-		if (playerIn instanceof ServerPlayerEntity)
+		if(playerIn instanceof ServerPlayerEntity)
 		{
 			Criteria.USED_ENDER_EYE.trigger((ServerPlayerEntity) playerIn, locpos);
 		}
 
 		worldIn.playSound((PlayerEntity) null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ENTITY_ENDER_EYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 
-		if (!playerIn.isCreative())
+		if(!playerIn.isCreative())
 		{
 			itemStack.decrement(1);
 		}
-
-		return;
 	}
 
 	private static float getDistance(int x1, int z1, int x2, int z2)
@@ -168,6 +168,6 @@ public class ItemGreaterEye extends Item
 	{
 		tooltip.add(new TranslatableText("item.greater_eye.greater_eye.line1").formatted(Formatting.YELLOW));
 		tooltip.add(new TranslatableText("item.greater_eye.greater_eye.line2").formatted(Formatting.YELLOW));
-		tooltip.add(new TranslatableText("item.greater_eye.greater_eye.message2", structureType).formatted(Formatting.LIGHT_PURPLE));
+		tooltip.add(new TranslatableText("item.greater_eye.greater_eye.message2", structureChoice).formatted(Formatting.LIGHT_PURPLE));
 	}
 }
