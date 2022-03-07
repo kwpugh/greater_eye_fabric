@@ -1,6 +1,5 @@
 package com.kwpugh.greater_eye.items;
 
-import com.kwpugh.greater_eye.GreaterEye;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EyeOfEnderEntity;
@@ -27,8 +26,8 @@ import java.util.Random;
 
 public class ItemGreaterEyeNether extends Item
 {
-	String structureChoice = "Fortress";
-    static TagKey<ConfiguredStructureFeature<?, ?>> newType = GreaterEye.FORTRESS;
+	String structureChoice = "Fortresses";
+    static TagKey<ConfiguredStructureFeature<?, ?>> netherType = TagInit.FORTRESSES;
 
 	public ItemGreaterEyeNether(Item.Settings settings)
 	{
@@ -43,27 +42,25 @@ public class ItemGreaterEyeNether extends Item
 
 		if(!worldIn.isClient)
 		{
-			ServerWorld serverWorld = (ServerWorld)worldIn;
-
-			if((playerIn.isSneaking() && (serverWorld.getRegistryKey().equals(World.NETHER))))    //shift right-click changes structure type to locate
+			if(playerIn.isSneaking())
 			{
-				if(structureChoice == "Fortress")
+				if(structureChoice == "Fortresses")
 				{
-					structureChoice = "Fossil";
-                    newType = GreaterEye.NETHER_FOSSIL;
+					structureChoice = "Fossils";
+                    netherType = TagInit.NETHER_FOSSILS;
 				}
-				else if(structureChoice == "Fossil")
+				else if(structureChoice == "Fossils")
 				{
-					structureChoice = "Bastion";
-                    newType = GreaterEye.BASTION_REMNNANT;
+					structureChoice = "Bastions";
+                    netherType = TagInit.BASTIONS;
 				}
-				else if(structureChoice == "Bastion")
+				else if(structureChoice == "Bastions")
 				{
-					structureChoice = "Fortress";
-                    newType = GreaterEye.FORTRESS;
+					structureChoice = "Fortresses";
+                    netherType = TagInit.FORTRESSES;
 				}
 
-				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.LIGHT_PURPLE)), true);
+				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.DARK_RED)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
@@ -92,17 +89,17 @@ public class ItemGreaterEyeNether extends Item
 	{
 		// A structure will always be found, no matter how far away
 		BlockPos playerpos = playerIn.getBlockPos();
-		BlockPos locpos = playerpos;
+		BlockPos locpos;
 		Random random = new Random();
         ServerWorld serverWorld = (ServerWorld) worldIn;
 
-        locpos = serverWorld.locateStructure(newType, playerIn.getBlockPos(), 100, false);
+        locpos = serverWorld.locateStructure(netherType, playerpos, 100, false);
 
 		ItemStack itemStack = playerIn.getStackInHand(handIn);
 
 		int structureDistance = MathHelper.floor(getDistance(playerpos.getX(), playerpos.getZ(), locpos.getX(), locpos.getZ()));
 
-		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.LIGHT_PURPLE), true);
+		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.DARK_RED), true);
 
 		EyeOfEnderEntity finderentity = new EyeOfEnderEntity(worldIn, playerIn.getX(), playerIn.getBodyY(0.5D), playerIn.getZ());
 		finderentity.setItem(itemstack);

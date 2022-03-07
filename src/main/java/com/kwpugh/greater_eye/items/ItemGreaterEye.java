@@ -1,6 +1,5 @@
 package com.kwpugh.greater_eye.items;
 
-import com.kwpugh.greater_eye.GreaterEye;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EyeOfEnderEntity;
@@ -27,8 +26,8 @@ import java.util.Random;
 
 public class ItemGreaterEye extends Item
 {
-	String structureChoice = "Village";
-	static TagKey<ConfiguredStructureFeature<?, ?>> overworldType = GreaterEye.VILLAGE;
+	String structureChoice = "Villages";
+	static TagKey<ConfiguredStructureFeature<?, ?>> overworldType = TagInit.VILLAGES;
 
 	public ItemGreaterEye(Settings settings)
 	{
@@ -43,53 +42,51 @@ public class ItemGreaterEye extends Item
 
 		if(!worldIn.isClient)
 		{
-			ServerWorld serverWorld = (ServerWorld) worldIn;
-
-			if((playerIn.isSneaking() && (serverWorld.getRegistryKey().equals(World.OVERWORLD))))    //shift right-click changes structure type to locate
+			if(playerIn.isSneaking())
 			{
-				if (structureChoice == "Village")
+				if (structureChoice == "Villages")
 				{
-					structureChoice = "Mineshaft";
-					overworldType = GreaterEye.MINESSHAFT;
-				} else if (structureChoice == "Mineshaft")
+					structureChoice = "Mineshafts";
+					overworldType = TagInit.MINESSHAFTS;
+				} else if (structureChoice == "Mineshafts")
 				{
-					structureChoice = "Shipwreck";
-					overworldType = GreaterEye.SHIPWRECK;
-				} else if (structureChoice == "Shipwreck")
+					structureChoice = "Shipwrecks";
+					overworldType = TagInit.SHIPWRECKS;
+				} else if (structureChoice == "Shipwrecks")
 				{
-					structureChoice = "Pillager_Outpost";
-					overworldType = GreaterEye.PILLAGER_OUTPOST;
-				} else if (structureChoice == "Pillager_Outpost")
+					structureChoice = "Outposts";
+					overworldType = TagInit.OUTPOSTS;
+				} else if (structureChoice == "Outposts")
 				{
-					structureChoice = "Monument";
-					overworldType = GreaterEye.MONUMENT;
-				} else if (structureChoice == "Monument")
+					structureChoice = "Monuments";
+					overworldType = TagInit.MONUMENTS;
+				} else if (structureChoice == "Monuments")
 				{
-					structureChoice = "Mansion";
-					overworldType = GreaterEye.MANSION;
-				} else if (structureChoice == "Mansion")
+					structureChoice = "Mansions";
+					overworldType = TagInit.MANSIONS;
+				} else if (structureChoice == "Mansions")
 				{
-					structureChoice = "Desert_Pyramid";
-					overworldType = GreaterEye.DESERT_PYRAMID;
-				} else if (structureChoice == "Desert_Pyramid")
+					structureChoice = "Pyramids";
+					overworldType = TagInit.PYRAMIDS;
+				} else if (structureChoice == "Pyramids")
 				{
-					structureChoice = "Jungle_Pyramid";
-					overworldType = GreaterEye.JUNGLE_PYRAMID;
-				} else if (structureChoice == "Jungle_Pyramid")
+					structureChoice = "Strongholds";
+					overworldType = TagInit.STRONGHOLDS;
+				} else if (structureChoice == "Strongholds")
 				{
-					structureChoice = "Stronghold";
-					overworldType = GreaterEye.STRONGHOLD;
-				} else if (structureChoice == "Stronghold")
+					structureChoice = "Buried Treasures";
+					overworldType = TagInit.BURIED_TREASURES;
+				} else if (structureChoice == "Buried Treasures")
 				{
-					structureChoice = "Buried Treasure";
-					overworldType = GreaterEye.BURIED_TREASURE;
-				} else if (structureChoice == "Buried Treasure")
+					structureChoice = "Ruins";
+					overworldType = TagInit.RUINS;
+				} else if (structureChoice == "Ruins")
 				{
-					structureChoice = "Village";
-					overworldType = GreaterEye.VILLAGE;
+					structureChoice = "Villages";
+					overworldType = TagInit.VILLAGES;
 				}
 
-				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.LIGHT_PURPLE)), true);
+				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.DARK_GREEN)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
@@ -100,7 +97,6 @@ public class ItemGreaterEye extends Item
 			if(!worldIn.isClient)
 			{
 				ServerWorld serverWorld = (ServerWorld) worldIn;
-
 
 				if((serverWorld.getRegistryKey().equals(World.OVERWORLD)));
 				{
@@ -127,7 +123,7 @@ public class ItemGreaterEye extends Item
 
 		if(locpos == null)
 		{
-			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure may have been replaced by another mod.").formatted(Formatting.LIGHT_PURPLE), true);
+			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure may have been replaced by another mod.").formatted(Formatting.GOLD), true);
 			return;
 		}
 
@@ -135,7 +131,7 @@ public class ItemGreaterEye extends Item
 
 		int structureDistance = MathHelper.floor(getDistance(playerpos.getX(), playerpos.getZ(), locpos.getX(), locpos.getZ()));
 
-		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.LIGHT_PURPLE), true);
+		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.DARK_GREEN), true);
 
 		EyeOfEnderEntity finderentity = new EyeOfEnderEntity(worldIn, playerIn.getX(), playerIn.getBodyY(0.5D), playerIn.getZ());
 		finderentity.setItem(itemstack);
