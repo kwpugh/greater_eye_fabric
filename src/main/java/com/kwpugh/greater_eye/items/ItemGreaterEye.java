@@ -1,5 +1,6 @@
 package com.kwpugh.greater_eye.items;
 
+import com.kwpugh.greater_eye.init.TagInit;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EyeOfEnderEntity;
@@ -82,6 +83,14 @@ public class ItemGreaterEye extends Item
 					overworldType = TagInit.RUINS;
 				} else if (structureChoice == "Ruins")
 				{
+					structureChoice = "Igloos";
+					overworldType = TagInit.IGLOOS;
+				} else if (structureChoice == "Igloos")
+				{
+					structureChoice = "Huts";
+					overworldType = TagInit.HUTS;
+				} else if (structureChoice == "Huts")
+				{
 					structureChoice = "Villages";
 					overworldType = TagInit.VILLAGES;
 				}
@@ -96,14 +105,9 @@ public class ItemGreaterEye extends Item
 		{
 			if(!worldIn.isClient)
 			{
-				ServerWorld serverWorld = (ServerWorld) worldIn;
+				findStructureAndShoot(worldIn, playerIn, itemStack, structureChoice, handIn);
 
-				if((serverWorld.getRegistryKey().equals(World.OVERWORLD)));
-				{
-					findStructureAndShoot(worldIn, playerIn, itemStack, structureChoice, handIn);
-
-					return TypedActionResult.success(itemStack);
-				}
+				return TypedActionResult.success(itemStack);
 			}
 		}
 

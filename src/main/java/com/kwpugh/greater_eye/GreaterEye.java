@@ -1,7 +1,7 @@
 package com.kwpugh.greater_eye;
 
-import com.kwpugh.greater_eye.items.ItemInit;
-import com.kwpugh.greater_eye.items.TagInit;
+import com.kwpugh.greater_eye.init.ItemInit;
+import com.kwpugh.greater_eye.init.TagInit;
 import net.fabricmc.api.ModInitializer;
 
 public class GreaterEye implements ModInitializer

@@ -1,4 +1,4 @@
-package com.kwpugh.greater_eye.items;
+package com.kwpugh.greater_eye.init;
 
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -16,11 +16,14 @@ public class TagInit
     public static final TagKey<ConfiguredStructureFeature<?, ?>> PYRAMIDS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "pyramids"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> MANSIONS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "mansions"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> STRONGHOLDS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "strongholds"));
+    public static final TagKey<ConfiguredStructureFeature<?, ?>> IGLOOS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "igloos"));
+    public static final TagKey<ConfiguredStructureFeature<?, ?>> HUTS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "witch_huts"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> RUINS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "ruins"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> FORTRESSES = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "fortresses"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> BASTIONS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "bastions"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> NETHER_FOSSILS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "nether_fossils"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> CITIES = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "cities"));
+
 
     public static void init()
     {

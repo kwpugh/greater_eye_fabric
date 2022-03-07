@@ -1,5 +1,6 @@
 package com.kwpugh.greater_eye.items;
 
+import com.kwpugh.greater_eye.init.TagInit;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EyeOfEnderEntity;
@@ -74,8 +75,6 @@ public class ItemGreaterEyeEnd extends Item
 		ServerWorld serverWorld = (ServerWorld) worldIn;
 		TagKey<ConfiguredStructureFeature<?, ?>> endType = TagInit.CITIES;
 
-		System.out.println("endType: " + endType);
-
 		locpos = serverWorld.locateStructure(endType, playerpos, 100, false);
 
 		if(locpos == null)
@@ -100,7 +99,7 @@ public class ItemGreaterEyeEnd extends Item
 			Criteria.USED_ENDER_EYE.trigger((ServerPlayerEntity) playerIn, locpos);
 		}
 
-		worldIn.playSound((PlayerEntity) null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ENTITY_ENDER_EYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+		worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ENTITY_ENDER_EYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 
 		if(!playerIn.isCreative())
 		{

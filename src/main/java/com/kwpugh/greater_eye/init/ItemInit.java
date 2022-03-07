@@ -1,6 +1,9 @@
-package com.kwpugh.greater_eye.items;
+package com.kwpugh.greater_eye.init;
 
 import com.kwpugh.greater_eye.GreaterEye;
+import com.kwpugh.greater_eye.items.ItemGreaterEye;
+import com.kwpugh.greater_eye.items.ItemGreaterEyeEnd;
+import com.kwpugh.greater_eye.items.ItemGreaterEyeNether;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
