@@ -45,23 +45,23 @@ public class ItemGreaterEyeNether extends Item
 		{
 			if(playerIn.isSneaking())
 			{
-				if(structureChoice == "Fortresses")
+				switch(structureChoice)
 				{
-					structureChoice = "Fossils";
-                    netherType = TagInit.NETHER_FOSSILS;
-				}
-				else if(structureChoice == "Fossils")
-				{
-					structureChoice = "Bastions";
-                    netherType = TagInit.BASTIONS;
-				}
-				else if(structureChoice == "Bastions")
-				{
-					structureChoice = "Fortresses";
-                    netherType = TagInit.FORTRESSES;
+					case "Fortresses" -> {
+						structureChoice = "Fossils";
+						netherType = TagInit.NETHER_FOSSILS;
+					}
+					case "Fossils" -> {
+						structureChoice = "Bastions";
+						netherType = TagInit.BASTIONS;
+					}
+					case "Bastions" -> {
+						structureChoice = "Fortresses";
+						netherType = TagInit.FORTRESSES;
+					}
 				}
 
-				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.DARK_RED)), true);
+				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.BOLD)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
@@ -91,11 +91,18 @@ public class ItemGreaterEyeNether extends Item
 
         locpos = serverWorld.locateStructure(netherType, playerpos, 100, false);
 
+		if(locpos == null)
+		{
+			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure might not exist here.").formatted(Formatting.BOLD), true);
+
+			return;
+		}
+
 		ItemStack itemStack = playerIn.getStackInHand(handIn);
 
 		int structureDistance = MathHelper.floor(getDistance(playerpos.getX(), playerpos.getZ(), locpos.getX(), locpos.getZ()));
 
-		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.DARK_RED), true);
+		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.BOLD), true);
 
 		EyeOfEnderEntity finderentity = new EyeOfEnderEntity(worldIn, playerIn.getX(), playerIn.getBodyY(0.5D), playerIn.getZ());
 		finderentity.setItem(itemstack);

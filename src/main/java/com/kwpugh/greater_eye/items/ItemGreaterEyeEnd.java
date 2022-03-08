@@ -73,13 +73,15 @@ public class ItemGreaterEyeEnd extends Item
 		BlockPos locpos;
 		Random random = new Random();
 		ServerWorld serverWorld = (ServerWorld) worldIn;
+
 		TagKey<ConfiguredStructureFeature<?, ?>> endType = TagInit.CITIES;
 
 		locpos = serverWorld.locateStructure(endType, playerpos, 100, false);
 
 		if(locpos == null)
 		{
-			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure may have been replaced by another mod or doesn't exist here.").formatted(Formatting.GOLD), true);
+			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure might not exist here.").formatted(Formatting.BOLD), true);
+
 			return;
 		}
 
@@ -87,7 +89,7 @@ public class ItemGreaterEyeEnd extends Item
 
 		int structureDistance = MathHelper.floor(getDistance(playerpos.getX(), playerpos.getZ(), locpos.getX(), locpos.getZ()));
 
-		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.DARK_PURPLE), true);
+		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.BOLD), true);
 
 		EyeOfEnderEntity finderentity = new EyeOfEnderEntity(worldIn, playerIn.getX(), playerIn.getBodyY(0.5D), playerIn.getZ());
 		finderentity.setItem(itemstack);

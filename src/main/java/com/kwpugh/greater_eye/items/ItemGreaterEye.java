@@ -45,57 +45,59 @@ public class ItemGreaterEye extends Item
 		{
 			if(playerIn.isSneaking())
 			{
-				if (structureChoice == "Villages")
+				switch (structureChoice)
 				{
-					structureChoice = "Mineshafts";
-					overworldType = TagInit.MINESSHAFTS;
-				} else if (structureChoice == "Mineshafts")
-				{
-					structureChoice = "Shipwrecks";
-					overworldType = TagInit.SHIPWRECKS;
-				} else if (structureChoice == "Shipwrecks")
-				{
-					structureChoice = "Outposts";
-					overworldType = TagInit.OUTPOSTS;
-				} else if (structureChoice == "Outposts")
-				{
-					structureChoice = "Monuments";
-					overworldType = TagInit.MONUMENTS;
-				} else if (structureChoice == "Monuments")
-				{
-					structureChoice = "Mansions";
-					overworldType = TagInit.MANSIONS;
-				} else if (structureChoice == "Mansions")
-				{
-					structureChoice = "Pyramids";
-					overworldType = TagInit.PYRAMIDS;
-				} else if (structureChoice == "Pyramids")
-				{
-					structureChoice = "Strongholds";
-					overworldType = TagInit.STRONGHOLDS;
-				} else if (structureChoice == "Strongholds")
-				{
-					structureChoice = "Buried Treasures";
-					overworldType = TagInit.BURIED_TREASURES;
-				} else if (structureChoice == "Buried Treasures")
-				{
-					structureChoice = "Ruins";
-					overworldType = TagInit.RUINS;
-				} else if (structureChoice == "Ruins")
-				{
-					structureChoice = "Igloos";
-					overworldType = TagInit.IGLOOS;
-				} else if (structureChoice == "Igloos")
-				{
-					structureChoice = "Huts";
-					overworldType = TagInit.HUTS;
-				} else if (structureChoice == "Huts")
-				{
-					structureChoice = "Villages";
-					overworldType = TagInit.VILLAGES;
+					case "Villages" -> {
+						structureChoice = "Mineshafts";
+						overworldType = TagInit.MINESSHAFTS;
+					}
+					case "Mineshafts" -> {
+						structureChoice = "Shipwrecks";
+						overworldType = TagInit.SHIPWRECKS;
+					}
+					case "Shipwrecks" -> {
+						structureChoice = "Outposts";
+						overworldType = TagInit.OUTPOSTS;
+					}
+					case "Outposts" -> {
+						structureChoice = "Monuments";
+						overworldType = TagInit.MONUMENTS;
+					}
+					case "Monuments" -> {
+						structureChoice = "Mansions";
+						overworldType = TagInit.MANSIONS;
+					}
+					case "Mansions" -> {
+						structureChoice = "Pyramids";
+						overworldType = TagInit.PYRAMIDS;
+					}
+					case "Pyramids" -> {
+						structureChoice = "Strongholds";
+						overworldType = TagInit.STRONGHOLDS;
+					}
+					case "Strongholds" -> {
+						structureChoice = "Buried Treasures";
+						overworldType = TagInit.BURIED_TREASURES;
+					}
+					case "Buried Treasures" -> {
+						structureChoice = "Ruins";
+						overworldType = TagInit.RUINS;
+					}
+					case "Ruins" -> {
+						structureChoice = "Igloos";
+						overworldType = TagInit.IGLOOS;
+					}
+					case "Igloos" -> {
+						structureChoice = "Huts";
+						overworldType = TagInit.HUTS;
+					}
+					case "Huts" -> {
+						structureChoice = "Villages";
+						overworldType = TagInit.VILLAGES;
+					}
 				}
 
-				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.DARK_GREEN)), true);
+				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.BOLD)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
@@ -114,7 +116,6 @@ public class ItemGreaterEye extends Item
 		return TypedActionResult.success(itemStack);
 	}
 
-
 	private static void findStructureAndShoot(World worldIn, PlayerEntity playerIn, ItemStack itemstack, String structureChoice, Hand handIn)
 	{
 		// A structure will always be found, no matter how far away
@@ -127,7 +128,8 @@ public class ItemGreaterEye extends Item
 
 		if(locpos == null)
 		{
-			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure may have been replaced by another mod.").formatted(Formatting.GOLD), true);
+			playerIn.sendMessage(new TranslatableText("Cannot be found! Structure might not exist here.").formatted(Formatting.BOLD), true);
+
 			return;
 		}
 
@@ -135,7 +137,7 @@ public class ItemGreaterEye extends Item
 
 		int structureDistance = MathHelper.floor(getDistance(playerpos.getX(), playerpos.getZ(), locpos.getX(), locpos.getZ()));
 
-		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.DARK_GREEN), true);
+		playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", structureChoice, structureDistance).formatted(Formatting.BOLD), true);
 
 		EyeOfEnderEntity finderentity = new EyeOfEnderEntity(worldIn, playerIn.getX(), playerIn.getBodyY(0.5D), playerIn.getZ());
 		finderentity.setItem(itemstack);
