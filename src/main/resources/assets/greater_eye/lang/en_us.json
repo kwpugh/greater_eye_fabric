@@ -6,9 +6,12 @@
 	"item.greater_eye.greater_eye.line1": "Points the way to many vanilla structures",
 	"item.greater_eye.greater_eye.line2": "Shift + right-click to change structure",
 
-	"item.greater_eye.greater_eye.message1": "Greater Eye of Ender will be looking for: %s",
+	"item.greater_eye.greater_eye.message1": "Choice: %s",
 	"item.greater_eye.greater_eye.message2": "Will search for: %s",
 	"item.greater_eye.greater_eye.message3": "The nearest %s is %s blocks away",
+	"item.greater_eye.greater_eye.message4": "Found %s at %s distance",
+
+	"item.greater_eye.greater_eye.message5": "Cannot be found! Structure might not exist here.",
 		
 	"itemGroup.greater_eye": "Greater Eye of Ender"
 }

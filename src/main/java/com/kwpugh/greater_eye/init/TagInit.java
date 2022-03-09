@@ -24,6 +24,8 @@ public class TagInit
     public static final TagKey<ConfiguredStructureFeature<?, ?>> NETHER_FOSSILS = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "nether_fossils"));
     public static final TagKey<ConfiguredStructureFeature<?, ?>> CITIES = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "cities"));
 
+    public static final TagKey<ConfiguredStructureFeature<?, ?>> CUSTOM1 = TagKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, new Identifier("greater_eye",  "custom1"));
+
 
     public static void init()
     {
