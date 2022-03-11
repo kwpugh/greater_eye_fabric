@@ -20,7 +20,6 @@ import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryEntryList;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.Random;

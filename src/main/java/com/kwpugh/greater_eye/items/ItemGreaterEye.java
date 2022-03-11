@@ -20,10 +20,12 @@ import java.util.List;
 
 public class ItemGreaterEye extends Item
 {
+	static boolean enableCustom1 = GreaterEye.CONFIG.GENERAL.enableCustom1;
+	static boolean enableDungeons = GreaterEye.CONFIG.GENERAL.enableDungeonType;
+	static boolean enableGraveYards = GreaterEye.CONFIG.GENERAL.enableGraveyards;
+
 	String structureChoice = "Villages";
 	static TagKey<ConfiguredStructureFeature<?, ?>> overworldType = TagInit.VILLAGES;
-
-	static boolean enableCustom1 = GreaterEye.CONFIG.GENERAL.enableCustom1;
 
 	public ItemGreaterEye(Settings settings)
 	{
@@ -47,6 +49,18 @@ public class ItemGreaterEye extends Item
 						overworldType = TagInit.MINESSHAFTS;
 					}
 					case "Mineshafts" -> {
+						if(enableGraveYards)  // if graveyards enabled in config, use it here
+						{
+							structureChoice = "Graveyards";
+							overworldType = TagInit.GRAVEYARDS;
+						}
+						else // otherwise move on to next
+						{
+							structureChoice = "Shipwrecks";
+							overworldType = TagInit.SHIPWRECKS;
+						}
+					}
+					case "Graveyards" -> {
 						structureChoice = "Shipwrecks";
 						overworldType = TagInit.SHIPWRECKS;
 					}
@@ -67,6 +81,18 @@ public class ItemGreaterEye extends Item
 						overworldType = TagInit.PYRAMIDS;
 					}
 					case "Pyramids" -> {
+						if(enableDungeons)  // if dungeons enabled in config, use it here
+						{
+							structureChoice = "Dungeons";
+							overworldType = TagInit.DUNGEONS;
+						}
+						else // otherwise move on to next
+						{
+							structureChoice = "Strongholds";
+							overworldType = TagInit.STRONGHOLDS;
+						}
+					}
+					case "Dungeons" -> {
 						structureChoice = "Strongholds";
 						overworldType = TagInit.STRONGHOLDS;
 					}
@@ -83,7 +109,7 @@ public class ItemGreaterEye extends Item
 						overworldType = TagInit.IGLOOS;
 					}
 					case "Igloos" -> {
-						if(enableCustom1)  // if custom enabled, use it here
+						if(enableCustom1)  // if custom enabled in config, use it here
 						{
 							structureChoice = "Custom1";
 							overworldType = TagInit.CUSTOM1;

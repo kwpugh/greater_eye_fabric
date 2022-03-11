@@ -14,9 +14,12 @@ public class ModConfig extends PartitioningSerializer.GlobalData
     public static class General implements ConfigData
     {
         @Comment("***********************"
-                +"\nRSettings (experimental)"
+                +"\nTag Settings (experimental)"
                 +"\n- requires datapack"
+                +"\n- tags are empty by default"
                 +"\n***********************")
+        public boolean enableDungeonType = false;
+        public boolean enableGraveyards = false;
         public boolean enableCustom1 = false;
 
     }
