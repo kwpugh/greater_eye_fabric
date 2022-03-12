@@ -1,12 +1,12 @@
 package com.kwpugh.greater_eye.items;
 
-import com.kwpugh.greater_eye.util.LocateUtil;
+import com.kwpugh.greater_eye.GreaterEye;
 import com.kwpugh.greater_eye.init.TagInit;
+import com.kwpugh.greater_eye.util.LocateUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -20,7 +20,10 @@ import java.util.List;
 
 public class ItemGreaterEyeEnd extends Item
 {
-	String structureChoice = "Cities";
+	static boolean enableEndBuildings = GreaterEye.CONFIG.GENERAL.enableEndBuildings;
+	static boolean enableDungeons = GreaterEye.CONFIG.GENERAL.enableDungeonType;
+
+	String structureChoice = "Monuments";
 	TagKey<ConfiguredStructureFeature<?, ?>> endType = TagInit.CITIES;
 
 	public ItemGreaterEyeEnd(Item.Settings settings)
@@ -36,11 +39,49 @@ public class ItemGreaterEyeEnd extends Item
 
 		if(!worldIn.isClient)
 		{
-			ServerWorld serverWorld = (ServerWorld)worldIn;
-
-			if((playerIn.isSneaking() && (serverWorld.getRegistryKey().equals(World.END))))    //shift right-click changes structure type to locate
+			if(playerIn.isSneaking())
 			{
-				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.DARK_PURPLE)), true);
+				switch(structureChoice)
+				{
+					case "Monuments" -> {
+						structureChoice = "Mansions";
+						endType = TagInit.MANSIONS;
+					}
+					case "Mansions" -> {
+						if(enableDungeons)  // if buildings enabled in config, use it here
+						{
+							structureChoice = "Dungeons";
+							endType = TagInit.DUNGEONS;
+						}
+						else // otherwise move on to next
+						{
+							structureChoice = "Cities";
+							endType = TagInit.CITIES;
+						}
+					}
+					case "Dungeons" -> {
+						structureChoice = "Cities";
+						endType = TagInit.CITIES;
+					}
+					case "Cities" -> {
+						if(enableEndBuildings)  // if buildings enabled in config, use it here
+						{
+							structureChoice = "End Buildings";
+							endType = TagInit.BUILDINGS_END;
+						}
+						else // otherwise move on to next
+						{
+							structureChoice = "Monuments";
+							endType = TagInit.MONUMENTS;
+						}
+					}
+					case "End Buildings" -> {
+						structureChoice = "Monuments";
+						endType = TagInit.MONUMENTS;
+					}
+				}
+
+				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.BOLD)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
@@ -62,6 +103,8 @@ public class ItemGreaterEyeEnd extends Item
 	@Override
 	public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext)
 	{
+		tooltip.add(new TranslatableText("item.greater_eye.greater_eye.line1").formatted(Formatting.YELLOW));
+		tooltip.add(new TranslatableText("item.greater_eye.greater_eye.line2").formatted(Formatting.YELLOW));
 	    tooltip.add(new TranslatableText("item.greater_eye.greater_eye.message2", structureChoice).formatted(Formatting.LIGHT_PURPLE));
 	}
 }

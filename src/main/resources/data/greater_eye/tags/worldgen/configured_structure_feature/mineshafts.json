@@ -1,7 +1,17 @@
 {
   "replace": false,
   "values": [
-    "minecraft:mineshaft",
-    "minecraft:mineshaft_mesa"
+    {
+      "id": "minecraft:mineshaft",
+      "required": false
+    },
+    {
+      "id": "minecraft:mineshaft_mesa",
+      "required": false
+    },
+    {
+      "id": "bettermineshafts:bettermineshaft",
+      "required": false
+    }
   ]
 }
