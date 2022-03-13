@@ -60,7 +60,7 @@ public class ItemGreaterEyeNether extends Item
 					}
  					case "Pyramids" -> {
 						structureChoice = "Fossils";
-						netherType = TagInit.NETHER_FOSSILS;
+						netherType = TagInit.FOSSILS;
 					}
 					case "Fossils" -> {
 						if(enableNetherBuildings)  // if buildings enabled in config, use it here

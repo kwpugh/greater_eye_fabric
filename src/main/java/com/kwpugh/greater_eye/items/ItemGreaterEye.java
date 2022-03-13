@@ -48,10 +48,10 @@ public class ItemGreaterEye extends Item
 						overworldType = TagInit.MINESHAFTS;
 					}
 					case "Mineshafts" -> {
-						structureChoice = "Shipwrecks";
-						overworldType = TagInit.SHIPWRECKS;
+						structureChoice = "Ships";
+						overworldType = TagInit.SHIPS;
 					}
-					case "Shipwrecks" -> {
+					case "Ships" -> {
 						structureChoice = "Ruins";
 						overworldType = TagInit.RUINS;
 					}
