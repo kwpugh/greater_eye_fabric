@@ -1,8 +1,8 @@
 package com.kwpugh.greater_eye.items;
 
 import com.kwpugh.greater_eye.GreaterEye;
-import com.kwpugh.greater_eye.util.LocateUtil;
 import com.kwpugh.greater_eye.init.TagInit;
+import com.kwpugh.greater_eye.util.LocateUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -14,7 +14,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ItemGreaterEye extends Item
 	static boolean enableBuildings = GreaterEye.CONFIG.GENERAL.enableBuildings;
 
 	String structureChoice = "Villages";
-	static TagKey<ConfiguredStructureFeature<?, ?>> overworldType = TagInit.VILLAGES;
+	static TagKey<StructureFeature> overworldType = TagInit.VILLAGES;
 
 	public ItemGreaterEye(Settings settings)
 	{

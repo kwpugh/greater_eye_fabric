@@ -19,14 +19,14 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryEntryList;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.Optional;
 import java.util.Random;
 
 public class LocateUtil
 {
-    public static void findStructureAndShoot(World worldIn, PlayerEntity playerIn, ItemStack itemstack, String structureChoice, Hand handIn, TagKey<ConfiguredStructureFeature<?, ?>> type)
+    public static void findStructureAndShoot(World worldIn, PlayerEntity playerIn, ItemStack itemstack, String structureChoice, Hand handIn, TagKey<StructureFeature> type)
     {
         // A structure will always be found, no matter how far away
         BlockPos playerpos = playerIn.getBlockPos();
@@ -50,14 +50,14 @@ public class LocateUtil
 
 
         // TESTING
-        Optional<RegistryEntryList.Named<ConfiguredStructureFeature<?, ?>>> optional = serverWorld.getRegistryManager().get(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY).getEntryList(type);
+        Optional<RegistryEntryList.Named<StructureFeature>> optional = serverWorld.getRegistryManager().get(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY).getEntryList(type);
 
         if(optional.isPresent())
         {
-            Pair<BlockPos, RegistryEntry<ConfiguredStructureFeature<?, ?>>> pair = serverWorld.getChunkManager().getChunkGenerator().locateStructure(serverWorld, optional.get(), playerpos, 100, false);
+            Pair<BlockPos, RegistryEntry<StructureFeature>> pair = serverWorld.getChunkManager().getChunkGenerator().locateStructure(serverWorld, optional.get(), playerpos, 100, false);
             if(pair != null)
             {
-                RegistryEntry<ConfiguredStructureFeature<?, ?>> value = pair.getSecond();
+                RegistryEntry<StructureFeature> value = pair.getSecond();
                 playerIn.sendMessage(new TranslatableText("item.greater_eye.greater_eye.message3", value.getKey().get().getValue().getPath(), structureDistance).formatted(Formatting.BOLD), true);
             }
             else

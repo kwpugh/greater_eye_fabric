@@ -14,7 +14,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ItemGreaterEyeEnd extends Item
 	static boolean enableDungeons = GreaterEye.CONFIG.GENERAL.enableDungeonType;
 
 	String structureChoice = "Monuments";
-	TagKey<ConfiguredStructureFeature<?, ?>> endType = TagInit.CITIES;
+	TagKey<StructureFeature> endType = TagInit.CITIES;
 
 	public ItemGreaterEyeEnd(Item.Settings settings)
 	{
