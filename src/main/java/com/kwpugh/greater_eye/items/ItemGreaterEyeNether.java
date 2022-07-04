@@ -9,12 +9,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tag.TagKey;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class ItemGreaterEyeNether extends Item
 	static boolean enableNetherBuildings = GreaterEye.CONFIG.GENERAL.enableNetherBuildings;
 
 	String structureChoice = "Fortresses";
-    static TagKey<StructureFeature> netherType = TagInit.FORTRESSES;
+    static TagKey<Structure> netherType = TagInit.FORTRESSES;
 
 	public ItemGreaterEyeNether(Item.Settings settings)
 	{
@@ -84,7 +84,7 @@ public class ItemGreaterEyeNether extends Item
 					}
 				}
 
-				playerIn.sendMessage((new TranslatableText("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.BOLD)), true);
+				playerIn.sendMessage((Text.translatable("item.greater_eye.greater_eye.message1", structureChoice).formatted(Formatting.BOLD)), true);
 
 				return TypedActionResult.success(itemStack);
 			}
@@ -105,8 +105,8 @@ public class ItemGreaterEyeNether extends Item
 
 	@Override
 	public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
-	    tooltip.add(new TranslatableText("item.greater_eye.greater_eye.line1").formatted(Formatting.YELLOW));
-	    tooltip.add(new TranslatableText("item.greater_eye.greater_eye.line2").formatted(Formatting.YELLOW));
-	    tooltip.add(new TranslatableText("item.greater_eye.greater_eye.message2", structureChoice).formatted(Formatting.LIGHT_PURPLE));
+	    tooltip.add(Text.translatable("item.greater_eye.greater_eye.line1").formatted(Formatting.YELLOW));
+	    tooltip.add(Text.translatable("item.greater_eye.greater_eye.line2").formatted(Formatting.YELLOW));
+	    tooltip.add(Text.translatable("item.greater_eye.greater_eye.message2", structureChoice).formatted(Formatting.LIGHT_PURPLE));
 	}
 }
