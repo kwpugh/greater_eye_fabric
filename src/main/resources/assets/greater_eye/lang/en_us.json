@@ -13,5 +13,5 @@
 
 	"item.greater_eye.greater_eye.message5": "Cannot be found! Structure might not exist here.",
 		
-	"itemGroup.greater_eye": "Greater Eye of Ender"
+	"itemGroup.greater_eye.greater_eye_group": "Greater Eye of Ender"
 }

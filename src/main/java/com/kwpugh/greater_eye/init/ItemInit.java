@@ -5,15 +5,14 @@ import com.kwpugh.greater_eye.items.ItemGreaterEye;
 import com.kwpugh.greater_eye.items.ItemGreaterEyeEnd;
 import com.kwpugh.greater_eye.items.ItemGreaterEyeNether;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ItemInit
 {
-    public static final Item GREATER_EYE = new ItemGreaterEye(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item GREATER_EYE_NETHER = new ItemGreaterEyeNether(new Item.Settings().group(ItemGroup.MISC));
-    public static final Item GREATER_EYE_END = new ItemGreaterEyeEnd(new Item.Settings().group(ItemGroup.MISC));
+    public static final Item GREATER_EYE = new ItemGreaterEye(new Item.Settings());
+    public static final Item GREATER_EYE_NETHER = new ItemGreaterEyeNether(new Item.Settings());
+    public static final Item GREATER_EYE_END = new ItemGreaterEyeEnd(new Item.Settings());
 
     public static void init()
     {

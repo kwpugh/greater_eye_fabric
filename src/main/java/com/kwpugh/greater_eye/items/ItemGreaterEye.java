@@ -120,7 +120,7 @@ public class ItemGreaterEye extends Item
 	public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext)
 	{
 		tooltip.add(Text.translatable("item.greater_eye.greater_eye.line1").formatted(Formatting.YELLOW));
-		tooltip.add(Text.translatable("item.greater_eye.greater_eye.line2").formatted(Formatting.YELLOW));
+		tooltip.add(Text.translatable("item.greater_eye.greater_eye.line2").formatted(Formatting.BLUE));
 		tooltip.add(Text.translatable("item.greater_eye.greater_eye.message2", structureChoice).formatted(Formatting.LIGHT_PURPLE));
 	}
 }
