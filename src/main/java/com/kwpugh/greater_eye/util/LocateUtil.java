@@ -15,9 +15,9 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryEntryList;
+import net.minecraft.util.registry.RegistryKeys;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.Structure;
 
@@ -50,7 +50,7 @@ public class LocateUtil
 
 
         // TESTING
-        Optional<RegistryEntryList.Named<Structure>> optional = serverWorld.getRegistryManager().get(Registry.STRUCTURE_KEY).getEntryList(type);
+        Optional<RegistryEntryList.Named<Structure>> optional = serverWorld.getRegistryManager().get(RegistryKeys.STRUCTURE_WORLDGEN).getEntryList(type);
 
         if(optional.isPresent())
         {

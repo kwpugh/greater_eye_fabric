@@ -5,7 +5,6 @@ import com.kwpugh.greater_eye.init.ItemInit;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.util.Identifier;
 
 public class GreaterEyeGroup
@@ -15,20 +14,12 @@ public class GreaterEyeGroup
         // force class run when we want
     }
 
-    public static final ItemGroup GREATER_EYE_GROUP = new FabricItemGroup(new Identifier(GreaterEye.MOD_ID, "greater_eye_group"))
-    {
-        @Override
-        public ItemStack createIcon()
-        {
-            return new ItemStack(ItemInit.GREATER_EYE);
-        }
-
-        @Override
-        protected void addItems(FeatureSet enabledFeatures, Entries entries)
-        {
-            entries.add(ItemInit.GREATER_EYE);
-            entries.add(ItemInit.GREATER_EYE_NETHER);
-            entries.add(ItemInit.GREATER_EYE_END);
-        }
-    };
+    private static final ItemGroup GREATER_EYE_GROUP = FabricItemGroup.builder(new Identifier(GreaterEye.MOD_ID, "greater_eye_group"))
+            .icon(() -> new ItemStack(ItemInit.GREATER_EYE))
+            .entries((enabledFeatures, entries, operatorEnabled) -> {
+                entries.add(ItemInit.GREATER_EYE);
+                entries.add(ItemInit.GREATER_EYE_NETHER);
+                entries.add(ItemInit.GREATER_EYE_END);
+            })
+            .build();
 }

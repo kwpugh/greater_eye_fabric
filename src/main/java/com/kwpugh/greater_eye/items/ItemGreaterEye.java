@@ -14,7 +14,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureType;
 
 import java.util.List;
 
