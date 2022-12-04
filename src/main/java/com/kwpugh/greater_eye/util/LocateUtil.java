@@ -5,19 +5,19 @@ import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EyeOfEnderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryEntryList;
-import net.minecraft.util.registry.RegistryKeys;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.Structure;
 
@@ -50,7 +50,7 @@ public class LocateUtil
 
 
         // TESTING
-        Optional<RegistryEntryList.Named<Structure>> optional = serverWorld.getRegistryManager().get(RegistryKeys.STRUCTURE_WORLDGEN).getEntryList(type);
+        Optional<RegistryEntryList.Named<Structure>> optional = serverWorld.getRegistryManager().get(RegistryKeys.STRUCTURE).getEntryList(type);
 
         if(optional.isPresent())
         {

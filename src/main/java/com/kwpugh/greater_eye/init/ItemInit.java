@@ -6,8 +6,8 @@ import com.kwpugh.greater_eye.items.ItemGreaterEyeEnd;
 import com.kwpugh.greater_eye.items.ItemGreaterEyeNether;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registries;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 public class ItemInit
 {

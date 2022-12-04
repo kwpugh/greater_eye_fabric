@@ -1,8 +1,8 @@
 package com.kwpugh.greater_eye.init;
 
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.RegistryKeys;
 import net.minecraft.world.gen.structure.Structure;
 
 public class TagInit
@@ -35,7 +35,7 @@ public class TagInit
 
     private static TagKey<Structure> of(String namespace, String path)
     {
-        return TagKey.of(RegistryKeys.STRUCTURE_WORLDGEN, new Identifier(namespace, path));
+        return TagKey.of(RegistryKeys.STRUCTURE, new Identifier(namespace, path));
     }
 
     public static void init()
